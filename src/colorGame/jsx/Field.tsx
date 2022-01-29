@@ -7,8 +7,8 @@ const Field: React.FC = () => {
 
   return (
     <div className="colorGame__field">
-      {state!.gameColors.map((color, index: number) => {
-        return <Item key={index} hex={color.hex} />;
+      {state!.gameColors.map((color, index) => {
+        return <Item key={index} color={color} />;
       })}
     </div>
   );

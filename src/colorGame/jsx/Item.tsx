@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FIELD_SIZE } from "../constants";
+import { GameContext } from "../index";
+import { iGameColor } from "../types";
 
-const Item: React.FC<{ hex: string }> = (props) => {
+const Item: React.FC<{ color: iGameColor }> = ({ color }) => {
+  const { state, setState } = useContext(GameContext);
+
+  const activeColorHandler = () => {
+    setState!((prev) => ({
+      ...prev,
+      activeColor: color.name,
+    }));
+  };
+
   return (
-    <div
+    <button
       className="colorGame__item"
+      onClick={activeColorHandler}
+      aria-disabled={state!.activeColor === color.name}
       style={{
-        color: `#${props.hex}`,
+        color: `#${color.hex}`,
         maxWidth: `${100 / FIELD_SIZE}%`,
       }}
     />

@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { GameContext } from "../index";
+import Label from "./Label";
 
 const List: React.FC = () => {
   const { state } = useContext(GameContext);
@@ -7,11 +8,11 @@ const List: React.FC = () => {
   const sort = state!.gameColors.map(({ name }) => name).sort();
 
   return (
-    <ul className="colorGame__list">
+    <div className="colorGame__list" aria-disabled={!state!.activeColor}>
       {sort.map((name) => {
-        return <li key={name}>{name}</li>;
+        return <Label name={name} />;
       })}
-    </ul>
+    </div>
   );
 };
 

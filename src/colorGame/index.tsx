@@ -10,6 +10,7 @@ export const GameContext = createContext<Partial<iGameCtx>>({});
 const ColorGame: React.FC = () => {
   const [state, setState] = useState({
     gameColors: randGameColors(),
+    activeColor: null,
   } as iGameState);
 
   return (
