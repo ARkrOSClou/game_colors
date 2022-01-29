@@ -1,7 +1,7 @@
 import { FIELD_SIZE } from "./constants";
 import { w3cColors } from "./colorSchema";
 
-export function fieldColors() {
+export function randGameColors() {
   const colsCount = Math.pow(FIELD_SIZE, 2);
   const schema = Object.entries(w3cColors).map(([name, hex]) => ({ name, hex }));
   const colors = [];

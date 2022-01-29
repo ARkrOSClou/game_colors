@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import Item from "./Item";
-import { iGameColors } from "../types";
+import { GameContext } from "../index";
 
-const Field: React.FC<{ colors: iGameColors }> = (props) => {
+const Field: React.FC = () => {
+  const { state } = useContext(GameContext);
+
   return (
     <div className="colorGame__field">
-      {props.colors.map((color, index) => {
+      {state!.gameColors.map((color, index: number) => {
         return <Item key={index} hex={color.hex} />;
       })}
     </div>

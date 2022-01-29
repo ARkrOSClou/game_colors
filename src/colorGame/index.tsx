@@ -1,17 +1,24 @@
-import React from "react";
-import { fieldColors } from "./utils";
+import React, { createContext, useState } from "react";
+import { randGameColors } from "./utils";
 import "./style.scss";
 import Field from "./jsx/Field";
 import List from "./jsx/List";
+import { iGameCtx, iGameState } from "./types";
+
+export const GameContext = createContext<Partial<iGameCtx>>({});
 
 const ColorGame: React.FC = () => {
-  const colors = fieldColors();
+  const [state, setState] = useState({
+    gameColors: randGameColors(),
+  } as iGameState);
 
   return (
-    <div className="colorGame">
-      <Field colors={colors} />
-      <List colors={colors} />
-    </div>
+    <GameContext.Provider value={{ state, setState }}>
+      <div className="colorGame">
+        <Field />
+        <List />
+      </div>
+    </GameContext.Provider>
   );
 };
 

@@ -1,8 +1,11 @@
-import React from "react";
-import { iGameColors } from "../types";
+import React, { useContext } from "react";
+import { GameContext } from "../index";
 
-const List: React.FC<{ colors: iGameColors }> = (props) => {
-  const sort = props.colors.map(({ name }) => name).sort();
+const List: React.FC = () => {
+  const { state } = useContext(GameContext);
+
+  const sort = state!.gameColors.map(({ name }) => name).sort();
+
   return (
     <ul className="colorGame__list">
       {sort.map((name) => {
