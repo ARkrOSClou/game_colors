@@ -70,7 +70,6 @@ export const w3cColors = {
   LightCoral: "F08080",
   LightCyan: "E0FFFF",
   LightGoldenRodYellow: "FAFAD2",
-  LightGray: "D3D3D3",
   LightGrey: "D3D3D3",
   LightGreen: "90EE90",
   LightPink: "FFB6C1",
