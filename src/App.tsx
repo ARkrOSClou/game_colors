@@ -1,14 +1,11 @@
 import React from "react";
 import "./App.css";
-import ColorField from "./colorGame/jsx/colorField";
-import { fieldColors } from "./colorGame/utils";
+import ColorGame from "./colorGame";
 
 function App() {
-  const colors = fieldColors();
-
   return (
     <div className="App">
-      <ColorField colors={colors} />
+      <ColorGame />
     </div>
   );
 }
