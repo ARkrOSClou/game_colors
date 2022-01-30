@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
 import { GameContext } from "../index";
-import { iGameColor, iGameColors } from "../types";
+import { iGameColorName, iGameColors, iGameColor } from "../types";
 
 const cloneDeep = require("lodash/cloneDeep");
 
-const Label: React.FC<{ color: iGameColor }> = ({ color }) => {
+const Label: React.FC<{ name: iGameColorName }> = ({ name }) => {
   const { state, setState } = useContext(GameContext);
+
+  const color: iGameColor = state!.gameColors.find((f) => f.name === name)!;
 
   const activeLabelHandler = () => {
     const { activeColor } = state!;
@@ -14,7 +16,7 @@ const Label: React.FC<{ color: iGameColor }> = ({ color }) => {
       const colors: iGameColors = cloneDeep(prev.gameColors);
       const active = colors.find((f) => f.name === activeColor);
       colors.forEach((m) => {
-        if (color.name !== m.name) {
+        if (name !== m.name) {
           return;
         }
         const current = colors.find((f) => f.name === m.name);
@@ -41,8 +43,11 @@ const Label: React.FC<{ color: iGameColor }> = ({ color }) => {
       // data-wrong={isWrong}
       onClick={activeLabelHandler}
     >
-      {color.name}
-      {JSON.stringify(color.statusLabel)}
+      {name}
+      {
+        // @ts-ignore
+        JSON.stringify(color.statusLabel)
+      }
     </button>
   );
 };

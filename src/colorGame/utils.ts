@@ -1,6 +1,6 @@
 import { FIELD_SIZE } from "./constants";
 import { w3cColors } from "./colorSchema";
-import { iGameColor, iGameColors } from "./types";
+import { iGameColor } from "./types";
 
 export function randGameColors() {
   const colsCount = Math.pow(FIELD_SIZE, 2);
@@ -16,8 +16,4 @@ export function randGameColors() {
     colors.push(rand[0]);
   }
   return colors;
-}
-
-export function aSortColors(gameColors: iGameColors) {
-  return gameColors.sort((a, b) => a.name.localeCompare(b.name));
 }
