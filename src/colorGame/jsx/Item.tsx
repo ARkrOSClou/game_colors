@@ -38,8 +38,6 @@ const Item: React.FC<{ color: iGameColor }> = ({ color }) => {
     }
   }
 
-  const c: any = compareContrast(w3cColors.Red, color.hex).toFixed();
-
   return (
     <button
       className="colorGame__item"
