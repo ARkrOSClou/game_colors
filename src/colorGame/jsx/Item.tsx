@@ -28,9 +28,11 @@ const Item: React.FC<{ color: iGameColor }> = ({ color }) => {
   if (color) {
     if (isWrong) {
       contrast = color.name.search(/red/i) >= 0;
+      // contrast = color.name.search(/red/i) >= 0 || compareContrast(w3cColors.Red, color.hex) < 1.2;
     }
     if (isDone) {
       contrast = color.name.search(/green/i) >= 0;
+      // contrast = color.name.search(/green/i) >= 0 || compareContrast(w3cColors.Green, color.hex) < 1.2;
     }
   }
 
