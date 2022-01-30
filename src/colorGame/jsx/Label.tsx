@@ -17,7 +17,7 @@ const Label: React.FC<{ name: iGameColorName }> = ({ name }) => {
   const activeLabelHandler = () => {
     const { activeColor } = state!;
 
-    if (isDone) {
+    if (!activeColor || isDone) {
       return;
     }
 

@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { iGameColor } from "../types";
 import { FIELD_SIZE } from "../constants";
+import { compareContrast } from "../utils";
+import { w3cColors } from "../colorSchema";
 import { GameContext } from "../index";
 import MarkDone from "./MarkDone";
 import MarkWrong from "./MarkWrong";
@@ -27,14 +29,16 @@ const Item: React.FC<{ color: iGameColor }> = ({ color }) => {
   let contrast = false;
   if (color) {
     if (isWrong) {
-      contrast = color.name.search(/red/i) >= 0;
-      // contrast = color.name.search(/red/i) >= 0 || compareContrast(w3cColors.Red, color.hex) < 1.2;
+      contrast = compareContrast(w3cColors.Red, color.hex) < 100;
+      // contrast = color.name.search(/red/i) >= 0;
     }
     if (isDone) {
-      contrast = color.name.search(/green/i) >= 0;
-      // contrast = color.name.search(/green/i) >= 0 || compareContrast(w3cColors.Green, color.hex) < 1.2;
+      contrast = compareContrast(w3cColors.Green, color.hex) < 100;
+      // contrast = color.name.search(/green/i) >= 0;
     }
   }
+
+  const c: any = compareContrast(w3cColors.Red, color.hex).toFixed();
 
   return (
     <button
