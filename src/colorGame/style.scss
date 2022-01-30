@@ -1,12 +1,15 @@
 
+$color_hover: yellow;
+$color_wrong: red;
+$color_done: green;
+$color_text: #000;
+
 
 .colorGame {
-    margin: 0 auto;
-    display: inline-flex;
+    display: flex;
     flex-flow: row wrap;
     align-items: center;
-    justify-content: flex-start;
-    width: 700px;
+    justify-content: center;
     text-align: initial;
     padding: 40px 20px;
     &, * {
@@ -31,52 +34,40 @@
     cursor: pointer;
     background: none;
     border: none;
-    &:before,
-    &:after {
+    transition: .1s ease;
+    &:before {
         content: '';
         display: block;
         padding-top: calc(100% - #{$offset});
         color: inherit;
-    }
-    &:before {
         background-color: currentColor;
-        border: 2px solid #000;
-        border-radius: 5px;
-    }
-    &:after {
-        z-index: -1;
-        padding: $offset;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: calc( 100% - #{$offset*2} );
-        height: calc( 100% - #{$offset*2} );
-        border-radius: 5px;
-        transition: .1s ease;
+        border: 2px solid $color_text;
+        border-radius: 8px;
     }
     &[data-active=true] {
         cursor: initial;
-        &:after {
-            background-color: #000;
+        &:before {
+            border-color: $color_hover;
         }
     }
     &[data-done=true] {
         cursor: initial;
         pointer-events: none;
-        &:after {
-            background-color: green;
+        &:before {
+            opacity: .6;
+            border-color: $color_done;
         }
     }
     &[data-wrong=true] {
-        &:after {
-            background-color: tomato;
+        &:before {
+            border-color: $color_wrong;
         }
     }
 }
 
 .colorGame__list {
-    border-left: 2px solid #000;
+    min-width: 15em;
+    border-left: 2px solid $color_text;
     padding-left: 40px;
     margin-left: 40px;
     display: inline-flex;
@@ -85,8 +76,57 @@
     transition: .1s ease;
     &[data-locked=true] {
         pointer-events: none;
-        opacity: .8;
+        opacity: .6;
     }
+}
+
+.mark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0;
+    width: 10px;
+    height: 10px;
+    &:before,
+    &:after {
+        font-size: 10px;
+        content: '';
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 2px;
+        height: 1em;
+        color: inherit;
+        background: currentColor;
+    }
+    &.mark--wrong {
+        color: $color_wrong;
+        &:before {
+            transform: translate(-50%, -50%) rotate(-45deg);
+        }
+        &:after {
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+    }
+    &.mark--done {
+        color: $color_done;
+        &:before {
+            content: none;
+        }
+        &:after {
+            height: 5px;
+            width: .8em;
+            background: transparent;
+            border-left: solid;
+            border-bottom: solid;
+            border-width: 2px;
+            border-color: currentColor;
+            transform: translate(-50%, -80%) rotate(-45deg);
+        }
+    }
+
 }
 
 .colorGame__label {
@@ -96,15 +136,26 @@
     font-size: 1rem;
     cursor: pointer;
     transition: .1s ease;
+    position: relative;
+    padding-left: 1em;
+    .mark {
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+    }
     &[data-done=true] {
         pointer-events: none;
-        color: green;
-        text-decoration: line-through;
+        //color: $color_done;
+        span {
+            text-decoration: line-through;
+        }
     }
     &[data-wrong=true] {
-        color: tomato;
+        //color: tomato;
     }
     &:hover {
-        color: orange;
+        color: $color_hover;
     }
 }
+
+
