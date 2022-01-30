@@ -15,9 +15,12 @@ export type iGameColors = iGameColor[];
 export type iGameState = {
   gameColors: iGameColors;
   activeColor: null | iGameColorHex;
+  gameStatus: null | boolean;
+  gameAttempts: number;
 };
 
 export type iGameCtx = {
   state: iGameState;
+  initState: () => iGameState;
   setState?: React.Dispatch<React.SetStateAction<iGameState>>;
 };

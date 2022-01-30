@@ -23,24 +23,37 @@ const Label: React.FC<{ name: iGameColorName }> = ({ name }) => {
 
     setState!((prev) => {
       const colors: iGameColors = cloneDeep(prev.gameColors);
-      const active = colors.find((f) => f.name === activeColor);
+      const active = colors.find((f) => f.name === activeColor)!;
+
+      let gameAttempts = prev.gameAttempts;
+
+      const setWrong = (current: iGameColor) => {
+        active.statusColor = false;
+        current.statusLabel = false;
+        gameAttempts--;
+      };
+
+      const setDone = (current: iGameColor) => {
+        active.statusColor = true;
+        current.statusLabel = true;
+      };
+
       colors.forEach((m) => {
         if (name !== m.name) {
           return;
         }
-        const current = colors.find((f) => f.name === m.name);
+        const current: iGameColor = colors.find((f) => f.name === m.name)!;
         if (active === current) {
-          current!.statusLabel = true;
-          current!.statusColor = true;
+          setDone(current);
         } else {
-          current!.statusLabel = false;
-          active!.statusColor = false;
+          setWrong(current);
         }
       });
       return {
         ...prev,
         activeColor: null,
         gameColors: colors,
+        gameAttempts: gameAttempts,
       };
     });
   };

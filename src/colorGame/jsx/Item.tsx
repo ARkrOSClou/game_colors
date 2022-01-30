@@ -24,6 +24,16 @@ const Item: React.FC<{ color: iGameColor }> = ({ color }) => {
 
   const isActive = state!.activeColor === color.name;
 
+  let contrast = false;
+  if (color) {
+    if (isWrong) {
+      contrast = color.name.search(/red/i) >= 0;
+    }
+    if (isDone) {
+      contrast = color.name.search(/green/i) >= 0;
+    }
+  }
+
   return (
     <button
       className="colorGame__item"
@@ -31,6 +41,7 @@ const Item: React.FC<{ color: iGameColor }> = ({ color }) => {
       data-active={isActive}
       data-wrong={isWrong}
       data-done={isDone}
+      data-contrast={contrast}
       style={{
         color: `#${color.hex}`,
         maxWidth: `${100 / FIELD_SIZE}%`,

@@ -3,82 +3,7 @@ $color_hover: yellow;
 $color_wrong: red;
 $color_done: green;
 $color_text: #000;
-
-
-.colorGame {
-    display: flex;
-    flex-flow: row wrap;
-    align-items: center;
-    justify-content: center;
-    text-align: initial;
-    padding: 40px 20px;
-    &, * {
-        box-sizing: border-box;
-        user-select: none;
-    }
-}
-
-.colorGame__field {
-    display: flex;
-    flex-flow: row wrap;
-    align-items: flex-start;
-    justify-content: flex-start;
-    width: 400px;
-}
-
-.colorGame__item {
-    $offset: 4px;
-    flex: 1 1 100%;
-    padding: $offset;
-    position: relative;
-    cursor: pointer;
-    background: none;
-    border: none;
-    transition: .1s ease;
-    &:before {
-        content: '';
-        display: block;
-        padding-top: calc(100% - #{$offset});
-        color: inherit;
-        background-color: currentColor;
-        border: 2px solid $color_text;
-        border-radius: 8px;
-    }
-    &[data-active=true] {
-        cursor: initial;
-        &:before {
-            border-color: $color_hover;
-        }
-    }
-    &[data-done=true] {
-        cursor: initial;
-        pointer-events: none;
-        &:before {
-            opacity: .6;
-            border-color: $color_done;
-        }
-    }
-    &[data-wrong=true] {
-        &:before {
-            border-color: $color_wrong;
-        }
-    }
-}
-
-.colorGame__list {
-    min-width: 15em;
-    border-left: 2px solid $color_text;
-    padding-left: 40px;
-    margin-left: 40px;
-    display: inline-flex;
-    flex-flow: column;
-    align-items: flex-start;
-    transition: .1s ease;
-    &[data-locked=true] {
-        pointer-events: none;
-        opacity: .6;
-    }
-}
+$color_light: #fff;
 
 .mark {
     position: absolute;
@@ -126,7 +51,119 @@ $color_text: #000;
             transform: translate(-50%, -80%) rotate(-45deg);
         }
     }
+    [data-contrast=true] & {
+        color: $color_light;
+    }
+}
 
+
+.colorGame {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+    text-align: initial;
+    padding: 40px 20px;
+    position: relative;
+    &, * {
+        box-sizing: border-box;
+        user-select: none;
+    }
+    &[data-status] {
+        pointer-events: none;
+        & > * {
+            opacity: .6;
+        }
+    }
+}
+
+.colorGame__status {
+    opacity: 1 !important;
+    pointer-events: all;
+    min-width: 400px;
+    min-height: 200px;
+    border-radius: 8px;
+    padding: 40px;
+    position: absolute;
+    z-index: 5;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: $color_light;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.colorGame__field {
+    display: inline-flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 400px;
+}
+
+.colorGame__item {
+    $offset: 4px;
+    flex: 1 1 100%;
+    padding: $offset;
+    position: relative;
+    cursor: pointer;
+    background: none;
+    border: none;
+    transition: .1s ease;
+    &:before {
+        content: '';
+        display: block;
+        padding-top: calc(100% - #{$offset});
+        color: inherit;
+        background-color: currentColor;
+        border: 2px solid $color_text;
+        border-radius: 8px;
+    }
+    &[data-wrong=true] {
+        &:before {
+            border-color: $color_wrong;
+        }
+    }
+    &[data-done=true] {
+        cursor: initial;
+        pointer-events: none;
+        &:before {
+            opacity: .6;
+            border-color: $color_done;
+        }
+    }
+    &[data-wrong=true],
+    &[data-done=true] {
+        &[data-contrast=true] {
+            &:before {
+                border-color: $color_light;
+            }
+        }
+    }
+    &[data-active=true] {
+        cursor: initial;
+        &:before {
+            border-color: $color_hover;
+        }
+    }
+}
+
+.colorGame__list {
+    min-width: 15em;
+    border-left: 2px solid $color_text;
+    padding-left: 40px;
+    margin-left: 40px;
+    display: inline-flex;
+    flex-flow: column;
+    align-items: flex-start;
+    transition: .1s ease;
+    &[data-locked=true] {
+        pointer-events: none;
+        opacity: .6;
+    }
 }
 
 .colorGame__label {
@@ -143,15 +180,14 @@ $color_text: #000;
         left: 0;
         transform: translateY(-50%);
     }
+    &[data-wrong=true] {
+        color: $color_wrong;
+    }
     &[data-done=true] {
         pointer-events: none;
-        //color: $color_done;
         span {
             text-decoration: line-through;
         }
-    }
-    &[data-wrong=true] {
-        //color: tomato;
     }
     &:hover {
         color: $color_hover;
@@ -159,3 +195,37 @@ $color_text: #000;
 }
 
 
+.colorGame__options {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    & > * + * {
+        margin-left: 10px;
+
+    }
+}
+
+.colorGame__reset {
+    padding: 10px 15px;
+    background: $color_light;
+    border: 2px solid $color_text;
+    border-radius: 8px;
+    transition: .1s ease;
+    font-size: 1rem;
+    line-height: 1em;
+    cursor: pointer;
+    &:hover {
+        background: rgba( $color_light, .6 );
+    }
+}
+
+.colorGame__attempts {
+    padding: 10px 15px;
+    border-radius: 8px;
+    background: $color_light;
+    font-size: 1rem;
+    line-height: 1em;
+}
