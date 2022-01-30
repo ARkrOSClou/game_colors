@@ -1,1 +1,1 @@
-export const FIELD_SIZE: number = 5;
+export const FIELD_SIZE: number = 2;

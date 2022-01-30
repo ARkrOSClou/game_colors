@@ -76,7 +76,6 @@ export const w3cColors = {
   LightSalmon: "FFA07A",
   LightSeaGreen: "20B2AA",
   LightSkyBlue: "87CEFA",
-  LightSlateGray: "778899",
   LightSlateGrey: "778899",
   LightSteelBlue: "B0C4DE",
   LightYellow: "FFFFE0",

@@ -1,16 +1,19 @@
 import React, { useContext } from "react";
 import { GameContext } from "../index";
+import { aSortColors } from "../utils";
 import Label from "./Label";
 
 const List: React.FC = () => {
   const { state } = useContext(GameContext);
 
-  const sort = state!.gameColors.map(({ name }) => name).sort();
+  const sortColors = aSortColors(state!.gameColors);
+
+  const isLocked = !state!.activeColor;
 
   return (
-    <div className="colorGame__list" aria-disabled={!state!.activeColor}>
-      {sort.map((name) => {
-        return <Label name={name} />;
+    <div className="colorGame__list" data-locked={isLocked}>
+      {sortColors.map((color) => {
+        return <Label key={color.name} color={color} />;
       })}
     </div>
   );

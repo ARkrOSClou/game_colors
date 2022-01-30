@@ -13,16 +13,20 @@ const Item: React.FC<{ color: iGameColor }> = ({ color }) => {
     }));
   };
 
+  const isActive = state!.activeColor === color.name;
+
   return (
     <button
       className="colorGame__item"
       onClick={activeColorHandler}
-      aria-disabled={state!.activeColor === color.name}
+      data-active={isActive}
       style={{
         color: `#${color.hex}`,
         maxWidth: `${100 / FIELD_SIZE}%`,
       }}
-    />
+    >
+      <span>{JSON.stringify(color.statusColor)}</span>
+    </button>
   );
 };
 
