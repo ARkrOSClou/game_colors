@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { GameContext } from "../index";
 import { iGameColorName, iGameColors, iGameColor } from "../types";
+import { GameContext } from "../index";
 import MarkWrong from "./MarkWrong";
 import MarkDone from "./MarkDone";
 

@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { GameContext } from "../index";
+import { RESET_LABEL } from "../constants";
 
 const Reset: React.FC = () => {
   const { setState, initState } = useContext(GameContext);
@@ -10,7 +11,7 @@ const Reset: React.FC = () => {
 
   return (
     <button className="colorGame__reset" onClick={resetHandler}>
-      Click to reset
+      {RESET_LABEL}
     </button>
   );
 };

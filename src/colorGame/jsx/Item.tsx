@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
+import { iGameColor } from "../types";
 import { FIELD_SIZE } from "../constants";
 import { GameContext } from "../index";
-import { iGameColor } from "../types";
 import MarkDone from "./MarkDone";
 import MarkWrong from "./MarkWrong";
 

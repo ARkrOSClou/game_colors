@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import Item from "./Item";
 import { GameContext } from "../index";
+import Item from "./Item";
 
 const Field: React.FC = () => {
   const { state } = useContext(GameContext);

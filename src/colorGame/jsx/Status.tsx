@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from "react";
+import { STATUS_LOSE, STATUS_WIN } from "../constants";
 import { GameContext } from "../index";
 import Reset from "./Reset";
 
@@ -16,13 +17,13 @@ const Status: React.FC = () => {
       ...prev,
       gameStatus: gameWin,
     }));
-  }, [gameOver, gameWin]);
+  }, [gameOver, gameWin, setState]);
 
   if (state!.gameStatus === null) {
     return <></>;
   }
 
-  const status = gameWin ? "You Win!" : "You Lose";
+  const status = gameWin ? STATUS_WIN : STATUS_LOSE;
 
   return (
     <div className="colorGame__status">
